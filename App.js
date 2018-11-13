@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import HomeScreen from './src/HomeScreen';
 import SettingsScreen from './src/SettingsScreen';
 import { FontAwesome } from '@expo/vector-icons';
+import LoadingScreen from './src/LoadingScreen';
 
 const MenuButton = (props) => {
 	return (
@@ -28,7 +29,25 @@ const Root = createStackNavigator({
 });
 
 export default class App extends React.Component {
+	constructor (props) {
+		super(props);
+
+		this.state = {
+			loading: true
+		};
+	}
+
+	componentWillMount() {
+		setTimeout(() => this.setState({
+			loading: false
+		}), 3000);
+	}
+
 	render() {
-		return <Root />;
+		if (this.state.loading) {
+			return <LoadingScreen />;
+		} else {
+			return <Root />;
+		}
 	}
 }
