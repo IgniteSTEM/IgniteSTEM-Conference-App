@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "AwesomeProject",
-    "description": "This project is really great.",
-    "slug": "AwesomeProject",
+    "name": "IgniteSTEM Conference App",
+    "description": "",
+    "slug": "ignitestem-conference-app",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],
