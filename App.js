@@ -1,10 +1,18 @@
+// React Stuff
 import React from 'react';
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import { View, Text, TouchableOpacity } from 'react-native';
+
+// Screens
 import HomeScreen from './src/HomeScreen';
 import SettingsScreen from './src/SettingsScreen';
+import TabScreen from './src/TabScreen';
+import GetStuff from './src/GetStuffFromServer';
 import ScheduleScreen from './src/ScheduleScreen';
 import { FontAwesome } from '@expo/vector-icons';
+import { getIconType } from 'react-native-elements';
+
+// The App
 import LoadingScreen from './src/LoadingScreen';
 
 const MenuButton = (props) => {
@@ -22,6 +30,9 @@ const Root = createStackNavigator({
 		screen: createDrawerNavigator({
 			Home: HomeScreen,
 			Settings: SettingsScreen,
+			TabScreen: TabScreen,
+			GetStuff: GetStuff, 
+
 			Schedule: ScheduleScreen
 		}),
 		navigationOptions: ({ navigation }) => (
