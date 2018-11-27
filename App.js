@@ -1,19 +1,16 @@
-// React Stuff
 import React from 'react';
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import { View, Text, TouchableOpacity } from 'react-native';
-
-// Screens
-import HomeScreen from './src/HomeScreen';
-import SettingsScreen from './src/SettingsScreen';
-import TabScreen from './src/TabScreen';
-import GetStuff from './src/GetStuffFromServer';
-import ScheduleScreen from './src/ScheduleScreen';
+import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
-import { getIconType } from 'react-native-elements';
 
-// The App
-import LoadingScreen from './src/LoadingScreen';
+import HomeScreen from './src/components/HomeScreen';
+import SettingsScreen from './src/components/SettingsScreen';
+import TabScreen from './src/components/TabScreen';
+import GetStuff from './src/components/GetStuffFromServer';
+import ScheduleScreen from './src/containers/ScheduleScreen';
+import LoadingScreen from './src/components/LoadingScreen';
+import configureStore from './src/configureStore';
 
 const MenuButton = (props) => {
 	return (
@@ -41,6 +38,8 @@ const Root = createStackNavigator({
 	}
 });
 
+const store = configureStore();
+
 export default class App extends React.Component {
 	constructor (props) {
 		super(props);
@@ -60,7 +59,11 @@ export default class App extends React.Component {
 		if (this.state.loading) {
 			return <LoadingScreen />;
 		} else {
-			return <Root />;
+			return (
+				<Provider store={store}>
+					<Root />
+				</Provider>
+			);
 		}
 	}
 }
