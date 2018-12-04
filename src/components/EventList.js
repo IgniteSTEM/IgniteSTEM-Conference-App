@@ -35,13 +35,23 @@ class EventList extends React.Component {
     }
 
 	render() {
+		const { events, selectable, selectedEvents, onSelect } = this.props;
+
+		let selectedItems = selectedEvents || [];
+
         return (
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={this._keyExtractor}
-                    data={this.props.events}
-                    renderItem={({ item }) => {
-                        return <EventListItem event={item.event} time={item.time} speaker={item.speaker} />
+                    data={events}
+                    renderItem={({ item, index }) => {
+						return <EventListItem 
+							event={item.event} 
+							time={item.time} 
+							speaker={item.speaker} 
+							selectable={selectable}
+							selected={selectedItems.indexOf(item) !== -1}
+							onSelect={() => onSelect(item)} />
                     }}
                     ItemSeparatorComponent={this.renderSeparator.bind(this)}
                     ListHeaderComponent={this.renderHeader}
