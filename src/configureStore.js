@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducer from './reducers';
+import rootReducer from './reducers';
 
 const DEBUG = false;
 
@@ -19,7 +19,7 @@ const configureStore = () =>  {
   }
 
   return createStore(
-    reducer,
+    rootReducer,
     applyMiddleware.apply(null, middlewares)
   );
 };

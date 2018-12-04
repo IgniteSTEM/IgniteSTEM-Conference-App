@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 class EventListItem extends Component {
     render() {
-        const { picture, name, lastMessage } = this.props;
+        const { event, time, speaker } = this.props;
 
         return (
             <View style={styles.block}>
-                <Image source={{ uri: picture }} style={styles.image} />
-                <View style={styles.meta}>
-                    <Text style={styles.name}>{name}</Text>
-                    <Text style={styles.lastMessage}>{lastMessage}</Text>
-                </View>
+                <Text style={styles.event}>{event}</Text>
+                <Text style={styles.time}>{time}</Text>
+                <Text style={styles.speaker}>{speaker}</Text>
             </View>
         )
 	}
@@ -19,25 +17,19 @@ class EventListItem extends Component {
 
 const styles = StyleSheet.create({
     block: {
-        flexDirection: 'row',
-        paddingBottom: 10,
+        paddingBottom: 10
     },
-    image: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-    },
-    meta: {
-        marginLeft: 10,
-        justifyContent: 'center',
-    },
-    name: {
+    event: {
         fontSize: 20,
-        fontWeight: '500',
+        fontWeight: '500'
     },
-    lastMessage: {
+    time: {
         fontSize: 14,
-        color: "#111",
+        color: '#555'
+    },
+    speaker: {
+        fontSize: 14,
+        color: "#111"
     }
 });
 
