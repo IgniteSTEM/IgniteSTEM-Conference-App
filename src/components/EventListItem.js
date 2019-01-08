@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
 
 class EventListItem extends Component {
@@ -15,22 +16,28 @@ class EventListItem extends Component {
         const { event, time, speaker, selectable, onSelect } = this.props;
 
         return (
-            <View style={styles.block}>
-                <View>
-                    <Text style={styles.event}>{event}</Text>
-                    <Text style={styles.time}>{time}</Text>
-                    { speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text> }
-                </View>
-                { 
-                    selectable ?
-                        <View>
-                            <TouchableOpacity onPress={() => onSelect()}>
-                                { this.renderIcon() }
-                            </TouchableOpacity>
-                        </View>
-                        : null
+            <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Event Detail', {
+                item: {
+                    event, time, speaker
                 }
-            </View>
+            })}>
+                <View style={styles.block}>
+                    <View>
+                        <Text style={styles.event}>{event}</Text>
+                        <Text style={styles.time}>{time}</Text>
+                        { speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text> }
+                    </View>
+                    { 
+                        selectable ?
+                            <View>
+                                <TouchableOpacity onPress={() => onSelect()}>
+                                    { this.renderIcon() }
+                                </TouchableOpacity>
+                            </View>
+                            : null
+                    }
+                </View>
+            </TouchableWithoutFeedback>
         )
 	}
 }
@@ -58,4 +65,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default EventListItem;
+export default withNavigation(EventListItem);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
+import { View, StyleSheet, FlatList, RefreshControl, TouchableWithoutFeedback } from 'react-native';
 import EventListItem from './EventListItem';
 
 class EventList extends React.Component {
@@ -35,24 +35,26 @@ class EventList extends React.Component {
     }
 
 	render() {
-		const { events, selectable, selectedEvents, onSelect } = this.props;
+		const { events, selectable, selectedEvents, onEventSelect, onEventPress } = this.props;
 
-		let selectedItems = selectedEvents || [];
-
+        let selectedItems = selectedEvents || [];
+        
         return (
             <View style={styles.container}>
                 <FlatList
                     keyExtractor={this._keyExtractor}
                     data={events}
-                    renderItem={({ item, index }) => {
-						return <EventListItem 
-							event={item.event} 
-							time={item.time} 
-							speaker={item.speaker} 
-							selectable={selectable}
-							selected={selectedItems.indexOf(item) !== -1}
-							onSelect={() => onSelect(item)} />
-                    }}
+                    renderItem={({ item, index }) => (
+                        <TouchableWithoutFeedback onPress={() => console.log('onPress()')}>
+                            <EventListItem
+                                event={item.event} 
+                                time={item.time} 
+                                speaker={item.speaker} 
+                                selectable={selectable}
+                                selected={selectedItems.indexOf(item) !== -1}
+                                onSelect={() => onEventSelect(item)} />
+                        </TouchableWithoutFeedback>
+                    )}
                     ItemSeparatorComponent={this.renderSeparator.bind(this)}
                     ListHeaderComponent={this.renderHeader}
                     refreshControl={

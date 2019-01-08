@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMaterialTopTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator, createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import EventList from '../components/EventList';
@@ -14,8 +14,8 @@ class GeneralScheduleScreen extends React.Component {
                 <EventList 
                     events={events} 
                     selectable={true}
-                    selectedEvents={selectedEvents} 
-                    onSelect={toggleEvent} />
+                    selectedEvents={selectedEvents}
+                    onEventSelect={toggleEvent} />
             </View>
         );
     }

@@ -7,6 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import HomeScreen from './src/components/HomeScreen';
 import SettingsScreen from './src/components/SettingsScreen';
 import TabScreen from './src/components/TabScreen';
+import EventDetailScreen from './src/components/EventDetailScreen';
 import GetStuff from './src/components/GetStuffFromServer';
 import ScheduleScreen from './src/containers/ScheduleScreen';
 import LoadingScreen from './src/components/LoadingScreen';
@@ -35,7 +36,8 @@ const Root = createStackNavigator({
 		navigationOptions: ({ navigation }) => (
 			{ headerLeft: <MenuButton navigation={navigation} /> }
 		)
-	}
+	},
+    'Event Detail': EventDetailScreen
 });
 
 const store = configureStore();
