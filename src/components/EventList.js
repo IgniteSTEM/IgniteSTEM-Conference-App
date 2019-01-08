@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     },
     separator: {
         height: 1,
-        width: "80%",
         alignSelf: 'center',
         backgroundColor: "#555"
     },

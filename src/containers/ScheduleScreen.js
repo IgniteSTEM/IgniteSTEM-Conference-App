@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createMaterialTopTabNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 import { View } from 'react-native';
 import EventList from '../components/EventList';
@@ -41,7 +41,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
-export default createBottomTabNavigator({
+export default createMaterialTopTabNavigator({
     Schedule: connect(mapStateToProps, mapDispatchToProps)(GeneralScheduleScreen),
     'My Schedule': connect(mapStateToProps)(PersonalScheduleScreen)
-});
+},
+{swipeEnabled: true,
+animationEnabled: true,
+tabBarPosition: 'bottom'});
