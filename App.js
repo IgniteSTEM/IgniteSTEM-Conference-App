@@ -1,14 +1,12 @@
 import React from 'react';
 import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 
 import HomeScreen from './src/components/HomeScreen';
 import SettingsScreen from './src/components/SettingsScreen';
-import TabScreen from './src/components/TabScreen';
 import EventDetailScreen from './src/components/EventDetailScreen';
-import GetStuff from './src/components/GetStuffFromServer';
 import ScheduleScreen from './src/containers/ScheduleScreen';
 import LoadingScreen from './src/components/LoadingScreen';
 import configureStore from './src/configureStore';
@@ -28,14 +26,11 @@ const Root = createStackNavigator({
 		screen: createDrawerNavigator({
 			Home: HomeScreen,
 			Settings: SettingsScreen,
-			TabScreen: TabScreen,
-			GetStuff: GetStuff, 
-
 			Schedule: ScheduleScreen
 		}),
-		navigationOptions: ({ navigation }) => (
-			{ headerLeft: <MenuButton navigation={navigation} /> }
-		)
+		navigationOptions: ({ navigation }) => ({ 
+			headerLeft: <MenuButton navigation={navigation} />
+		})
 	},
     'Event Detail': EventDetailScreen
 });

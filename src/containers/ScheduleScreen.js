@@ -44,7 +44,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export default createMaterialTopTabNavigator({
     Schedule: connect(mapStateToProps, mapDispatchToProps)(GeneralScheduleScreen),
     'My Schedule': connect(mapStateToProps)(PersonalScheduleScreen)
-},
-{swipeEnabled: true,
-animationEnabled: true,
-tabBarPosition: 'bottom'});
+}, {
+    swipeEnabled: true,
+    animationEnabled: true,
+    tabBarPosition: 'bottom'
+});
