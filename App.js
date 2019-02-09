@@ -14,7 +14,7 @@ import configureStore from './src/configureStore';
 const MenuButton = (props) => {
 	return (
 		<View>
-			<TouchableOpacity onPress={() => props.navigation.toggleDrawer()} style={{marginLeft: 10}}>
+			<TouchableOpacity onPress={() => props.navigation.toggleDrawer()} style={{ marginLeft: 10 }}>
 				<FontAwesome name="bars" size={32} color="black" />
 			</TouchableOpacity>
 		</View>
@@ -28,17 +28,17 @@ const Root = createStackNavigator({
 			Settings: SettingsScreen,
 			Schedule: ScheduleScreen
 		}),
-		navigationOptions: ({ navigation }) => ({ 
+		navigationOptions: ({ navigation }) => ({
 			headerLeft: <MenuButton navigation={navigation} />
 		})
 	},
-    'Event Detail': EventDetailScreen
+	'Event Detail': EventDetailScreen
 });
 
 const store = configureStore();
 
 export default class App extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 
 		this.state = {

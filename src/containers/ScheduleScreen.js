@@ -6,46 +6,46 @@ import EventList from '../components/EventList';
 import { toggleEvent } from '../actions/schedule';
 
 class GeneralScheduleScreen extends React.Component {
-    render() {
-        const { events, selectedEvents, toggleEvent } = this.props;
+	render() {
+		const { events, selectedEvents, toggleEvent } = this.props;
 
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <EventList 
-                    events={events} 
-                    selectable={true}
-                    selectedEvents={selectedEvents}
-                    onEventSelect={toggleEvent} />
-            </View>
-        );
-    }
+		return (
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<EventList
+					events={events}
+					selectable={true}
+					selectedEvents={selectedEvents}
+					onEventSelect={toggleEvent} />
+			</View>
+		);
+	}
 }
 
 class PersonalScheduleScreen extends React.Component {
-    render() {
-        const { selectedEvents } = this.props;
+	render() {
+		const { selectedEvents } = this.props;
 
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <EventList events={selectedEvents} selectable={false} />
-            </View>
-        );
-    }
+		return (
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<EventList events={selectedEvents} selectable={false} />
+			</View>
+		);
+	}
 }
 
 const mapStateToProps = ({ schedule }) => schedule;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    toggleEvent: (event) => {
-        dispatch(toggleEvent(event));
-  }
+	toggleEvent: (event) => {
+		dispatch(toggleEvent(event));
+	}
 });
 
 export default createMaterialTopTabNavigator({
-    Schedule: connect(mapStateToProps, mapDispatchToProps)(GeneralScheduleScreen),
-    'My Schedule': connect(mapStateToProps)(PersonalScheduleScreen)
+	Schedule: connect(mapStateToProps, mapDispatchToProps)(GeneralScheduleScreen),
+	'My Schedule': connect(mapStateToProps)(PersonalScheduleScreen)
 }, {
-    swipeEnabled: true,
-    animationEnabled: true,
-    tabBarPosition: 'bottom'
-});
+		swipeEnabled: true,
+		animationEnabled: true,
+		tabBarPosition: 'bottom'
+	});

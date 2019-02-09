@@ -1,7 +1,7 @@
 import { REMOVE_SELECTED_EVENT, ADD_SELECTED_EVENT } from '../actions/schedule';
 
 const initialState = {
-	events:  [
+	events: [
 		{
 			"event": "Registration & Breakfast",
 			"time": "9:00AM",
@@ -70,21 +70,21 @@ const initialState = {
 	],
 	selectedEvents: []
 };
-  
+
 const schedule = (state = initialState, action) => {
 	switch (action.type) {
-	case REMOVE_SELECTED_EVENT:
-		return {
-			...state,
-			selectedEvents: state.selectedEvents.filter((event) => event !== action.event)
-		};
-	case ADD_SELECTED_EVENT:
-		return {
-			...state,
-			selectedEvents: state.events.filter((event) => (state.selectedEvents.indexOf(event) !== -1) || event === action.event)
-		};
-	default:
-		return state;
+		case REMOVE_SELECTED_EVENT:
+			return {
+				...state,
+				selectedEvents: state.selectedEvents.filter((event) => event !== action.event)
+			};
+		case ADD_SELECTED_EVENT:
+			return {
+				...state,
+				selectedEvents: state.events.filter((event) => (state.selectedEvents.indexOf(event) !== -1) || event === action.event)
+			};
+		default:
+			return state;
 	}
 };
 
