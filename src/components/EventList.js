@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, RefreshControl, TouchableWithoutFeedback } from 'react-native';
+import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import EventListItem from './EventListItem';
 
 class EventList extends React.Component {
@@ -35,7 +35,7 @@ class EventList extends React.Component {
 	}
 
 	render() {
-		const { events, selectable, selectedEvents, onEventSelect, onEventPress } = this.props;
+		const { events, selectable, selectedEvents, onEventSelect } = this.props;
 
 		let selectedItems = selectedEvents || [];
 
@@ -44,16 +44,14 @@ class EventList extends React.Component {
 				<FlatList
 					keyExtractor={this._keyExtractor}
 					data={events}
-					renderItem={({ item, index }) => (
-						<TouchableWithoutFeedback onPress={() => console.log('onPress()')}>
-							<EventListItem
-								event={item.event}
-								time={item.time}
-								speaker={item.speaker}
-								selectable={selectable}
-								selected={selectedItems.indexOf(item) !== -1}
-								onSelect={() => onEventSelect(item)} />
-						</TouchableWithoutFeedback>
+					renderItem={({ item }) => (
+						<EventListItem
+							event={item.event}
+							time={item.time}
+							speaker={item.speaker}
+							selectable={selectable}
+							selected={selectedItems.indexOf(item) !== -1}
+							onSelect={() => onEventSelect(item)} />
 					)}
 					ItemSeparatorComponent={this.renderSeparator.bind(this)}
 					ListHeaderComponent={this.renderHeader}
@@ -73,6 +71,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginTop: 20,
+		width: '85%'
 	},
 	separator: {
 		height: 1,

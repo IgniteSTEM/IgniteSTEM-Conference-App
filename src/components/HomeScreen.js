@@ -1,26 +1,13 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import PDFReader from "rn-pdf-reader-js";
-import { Constants } from "expo";
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import Heading from './Heading';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <PDFReader
-          source={{
-            uri: "http://gahp.net/wp-content/uploads/2017/09/sample.pdf"
-          }}
-        />
-      </View>
-    );
-  }
+export default class App extends Component {
+	render() {
+		return (
+			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+				<Heading>Home screen</Heading>
+			</View>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#ecf0f1"
-  }
-});
