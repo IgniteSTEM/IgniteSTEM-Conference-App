@@ -25,7 +25,7 @@ const Heading = ({ level, children }) => (
 			...style, 
 			fontSize: FONT_SIZES[level || 1]
 			}}>
-			{children.toUpperCase()}
+			{children}
 		</Text>
 		{ 
 			!level || level == 1 ? 

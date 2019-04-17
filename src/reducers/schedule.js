@@ -1,4 +1,4 @@
-import { REMOVE_USER_EVENT, ADD_USER_EVENT, RECEIVE_EVENTS, RECEIVE_USER_EVENTS } from '../actions/schedule';
+import { RECEIVE_EVENTS, RECEIVE_USER_EVENTS } from '../actions/schedule';
 
 const initialState = {
 	events: [],
@@ -16,16 +16,6 @@ const schedule = (state = initialState, action) => {
 			return {
 				...state,
 				userEvents: action.events
-			}
-		case REMOVE_USER_EVENT:
-			return {
-				...state,
-				userEvents: state.userEvents.filter((event) => event._id !== action.event._id)
-			};
-		case ADD_USER_EVENT:
-			return {
-				...state,
-				userEvents: [...state.userEvents, action.event]
 			};
 		default:
 			return state;

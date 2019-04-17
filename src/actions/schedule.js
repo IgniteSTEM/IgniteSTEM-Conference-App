@@ -1,7 +1,5 @@
 import { EVENT_REGISTER, EVENT_DEREGISTER, EVENT_LIST } from './endpoints';
 
-export const REMOVE_USER_EVENT = 'REMOVE_USER_EVENT';
-export const ADD_USER_EVENT = 'ADD_USER_EVENT';
 export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
 export const RECEIVE_USER_EVENTS = 'RECEIVE_USER_EVENTS';
 
@@ -13,16 +11,6 @@ const receiveEvents = (events) => ({
 const receiveUserEvents = (events) => ({
 	type: RECEIVE_USER_EVENTS,
 	events
-});
-
-const addUserEvent = (event) => ({
-	type: ADD_USER_EVENT,
-	event
-});
-
-const removeUserEvent = (event) => ({
-	type: REMOVE_USER_EVENT,
-	event
 });
 
 export const fetchEvents = () =>
@@ -64,7 +52,7 @@ export const registerEvent = (event) =>
 		})
 			.then(res => {
 				if (res.ok) {
-					dispatch(addUserEvent(event));
+					dispatch(fetchEvents());
 				} else {
 					res.json()
 						.then(({ error }) => console.error(error));
@@ -90,7 +78,7 @@ export const deregisterEvent = (event) =>
 		})
 			.then(res => {
 				if (res.ok) {
-					dispatch(removeUserEvent(event));
+					dispatch(fetchEvents());
 				} else {
 					res.json()
 						.then(({ error }) => console.error(error));

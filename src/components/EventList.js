@@ -54,9 +54,7 @@ class EventList extends React.Component {
 					data={events}
 					renderItem={({ item }) => (
 						<EventListItem
-							name={item.name}
-							time={item.time}
-							speaker={item.speaker}
+							event={item}
 							selectable={selectable}
 							selected={isSelected(item)}
 							onSelect={() => onEventSelect(item)} />

@@ -6,7 +6,7 @@ export default class App extends Component {
 	render() {
 		return (
 			<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-				<Heading>Home screen</Heading>
+				<Heading>Home Screen</Heading>
 			</View>
 		);
 	}
