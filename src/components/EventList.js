@@ -24,6 +24,9 @@ class EventList extends React.Component {
 	}
 
 	_onRefresh() {
+		if (this.props.refresh) {
+			this.props.refresh();
+		}
 		this.setState({
 			refreshing: true
 		})
@@ -34,11 +37,16 @@ class EventList extends React.Component {
 		}.bind(this), 1000)
 	}
 
+	isSelected(event) {
+		const selectedEvents = this.props.selectedEvents || [];
+		return selectedEvents.some((selectedEvent) => event._id === selectedEvent._id);
+	}
+
 	render() {
-		const { events, selectable, selectedEvents, onEventSelect } = this.props;
+		const { events, selectable, onEventSelect } = this.props;
 
-		let selectedItems = selectedEvents || [];
-
+		const isSelected = this.isSelected.bind(this);
+		
 		return (
 			<View style={styles.container}>
 				<FlatList
@@ -46,11 +54,11 @@ class EventList extends React.Component {
 					data={events}
 					renderItem={({ item }) => (
 						<EventListItem
-							event={item.event}
+							name={item.name}
 							time={item.time}
 							speaker={item.speaker}
 							selectable={selectable}
-							selected={selectedItems.indexOf(item) !== -1}
+							selected={isSelected(item)}
 							onSelect={() => onEventSelect(item)} />
 					)}
 					ItemSeparatorComponent={this.renderSeparator.bind(this)}

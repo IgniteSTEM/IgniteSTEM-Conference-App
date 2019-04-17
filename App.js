@@ -9,7 +9,7 @@ import HomeScreen from './src/components/HomeScreen';
 import SettingsScreen from './src/components/SettingsScreen';
 import EventDetailScreen from './src/components/EventDetailScreen';
 import ScheduleScreen from './src/containers/ScheduleScreen';
-import LoadingScreen from './src/components/LoadingScreen';
+import LoadingScreen from './src/containers/LoadingScreen';
 import configureStore from './src/configureStore';
 import registerForPushNotificationsAsync from './src/registerForPushNotificationsAsync';
 
@@ -49,7 +49,8 @@ export default class App extends React.Component {
 	}
 
 	componentDidMount() {
-		registerForPushNotificationsAsync();
+		// TODO
+		// registerForPushNotificationsAsync();
 	
 		// Handle notifications that are received or selected while the app
 		// is open. If the app was closed and then opened by tapping the
@@ -66,18 +67,18 @@ export default class App extends React.Component {
 	componentWillMount() {
 		setTimeout(() => this.setState({
 			loading: false
-		}), 1000);
+		}), 3000);
 	}
 
 	render() {
-		if (this.state.loading) {
-			return <LoadingScreen />;
-		} else {
-			return (
-				<Provider store={store}>
+		return (
+			<Provider store={store}>
+			{
+				this.state.loading ?
+					<LoadingScreen /> :
 					<Root />
-				</Provider>
-			);
-		}
+			}
+			</Provider>
+		);
 	}
 }

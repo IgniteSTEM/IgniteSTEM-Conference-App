@@ -3,7 +3,7 @@
 import { Permissions, Notifications } from 'expo';
 
 // TODO: fill this in
-const PUSH_ENDPOINT = 'https://http://ignitestem.org/';
+const PUSH_ENDPOINT = 'https://google.com';
 
 export default async function registerForPushNotificationsAsync() {
   const { status: existingStatus } = await Permissions.getAsync(

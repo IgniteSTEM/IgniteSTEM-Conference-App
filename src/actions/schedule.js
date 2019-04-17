@@ -1,24 +1,111 @@
-export const REMOVE_SELECTED_EVENT = 'REMOVE_SELECTED_EVENT';
-export const ADD_SELECTED_EVENT = 'ADD_SELECTED_EVENT';
+import { EVENT_REGISTER, EVENT_DEREGISTER, EVENT_LIST } from './endpoints';
 
-export const removeSelectedEvent = (event) => ({
-	type: REMOVE_SELECTED_EVENT,
+export const REMOVE_USER_EVENT = 'REMOVE_USER_EVENT';
+export const ADD_USER_EVENT = 'ADD_USER_EVENT';
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+export const RECEIVE_USER_EVENTS = 'RECEIVE_USER_EVENTS';
+
+const receiveEvents = (events) => ({
+	type: RECEIVE_EVENTS,
+	events
+});
+
+const receiveUserEvents = (events) => ({
+	type: RECEIVE_USER_EVENTS,
+	events
+});
+
+const addUserEvent = (event) => ({
+	type: ADD_USER_EVENT,
 	event
 });
 
-export const addSelectedEvent = (event) => ({
-	type: ADD_SELECTED_EVENT,
+const removeUserEvent = (event) => ({
+	type: REMOVE_USER_EVENT,
 	event
 });
+
+export const fetchEvents = () =>
+	(dispatch, getState) => {
+		fetch(EVENT_LIST)
+			.then(res => {
+				if (res.ok) {
+					res.json()
+						.then(events => dispatch(receiveEvents(events)));
+				}
+			})
+			.catch(err => console.error(err));
+
+		fetch(`${EVENT_LIST}?userId=${getState().user._id}`)
+			.then(res => {
+				if (res.ok) {
+					res.json()
+						.then(events => dispatch(receiveUserEvents(events)));
+				}
+			})
+			.catch(err => console.error(err));
+	};
+
+export const registerEvent = (event) => 
+	(dispatch, getState) => {
+		const eventId = event._id;
+		const userId = getState().user._id;
+
+		console.log(`register: ${eventId}, ${userId}`);
+
+		fetch(EVENT_REGISTER, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				eventId, userId
+			})
+		})
+			.then(res => {
+				if (res.ok) {
+					dispatch(addUserEvent(event));
+				} else {
+					res.json()
+						.then(({ error }) => console.error(error));
+				}
+			}).catch(err => console.error(err));
+	};
+
+export const deregisterEvent = (event) =>
+	(dispatch, getState) => {
+		const eventId = event._id;
+		const userId = getState().user._id;
+
+		console.log(`deregister: ${eventId}, ${userId}`);
+
+		fetch(EVENT_DEREGISTER, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				eventId, userId
+			})
+		})
+			.then(res => {
+				if (res.ok) {
+					dispatch(removeUserEvent(event));
+				} else {
+					res.json()
+						.then(({ error }) => console.error(error));
+				}
+			}).catch(err => console.error(err));
+	};
 
 export const toggleEvent = (event) => (
 	(dispatch, getState) => {
-		const { selectedEvents } = getState().schedule;
+		const { userEvents } = getState().schedule;
 
-		if (selectedEvents.indexOf(event) === -1) {
-			dispatch(addSelectedEvent(event));
+		if (userEvents.some((userEvent) => event._id === userEvent._id)) {
+			dispatch(deregisterEvent(event));
 		} else {
-			dispatch(removeSelectedEvent(event));
+			dispatch(registerEvent(event));
 		}
 	}
 );

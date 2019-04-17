@@ -13,17 +13,17 @@ class EventListItem extends Component {
 	}
 
 	render() {
-		const { event, time, speaker, selectable, onSelect } = this.props;
+		const { name, time, speaker, selectable, onSelect } = this.props;
 
 		return (
 			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Event Detail', {
 				item: {
-					event, time, speaker
+					name, time, speaker
 				}
 			})}>
 				<View style={styles.block}>
 					<View>
-						<Text style={styles.event}>{event}</Text>
+						<Text style={styles.name}>{name}</Text>
 						<Text style={styles.time}>{time}</Text>
 						{speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text>}
 					</View>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingRight: 10
 	},
-	event: {
+	name: {
 		fontSize: 20,
 		fontWeight: '500'
 	},
