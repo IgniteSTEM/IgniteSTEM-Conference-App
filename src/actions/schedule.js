@@ -39,8 +39,6 @@ export const registerEvent = (event) =>
 		const eventId = event._id;
 		const userId = getState().user._id;
 
-		console.log(`register: ${eventId}, ${userId}`);
-
 		fetch(EVENT_REGISTER, {
 			method: 'POST',
 			headers: {
@@ -64,8 +62,6 @@ export const deregisterEvent = (event) =>
 	(dispatch, getState) => {
 		const eventId = event._id;
 		const userId = getState().user._id;
-
-		console.log(`deregister: ${eventId}, ${userId}`);
 
 		fetch(EVENT_DEREGISTER, {
 			method: 'POST',

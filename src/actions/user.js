@@ -22,7 +22,6 @@ const receiveUser = (name, _id) => ({
 
 const saveAndReceiveUser = (name, _id) => 
 	dispatch => {
-		console.log(`save(${name}, ${_id})`);
 		const idPair = [USER_ID_KEY, _id];
 		const namePair = [USER_NAME_KEY, name];
 		AsyncStorage.multiSet([idPair, namePair])
