@@ -31,10 +31,13 @@ const Root = createStackNavigator({
 			Schedule: ScheduleScreen
 		}),
 		navigationOptions: ({ navigation }) => ({
-			headerLeft: <MenuButton navigation={navigation} />
+			headerLeft: <MenuButton navigation={navigation} />,
+			headerStyle: {
+        		backgroundColor: '#f4511e'
+      		},
 		})
 	},
-	'Event Detail': EventDetailScreen
+	'Event Detail': EventDetailScreen,
 });
 
 const store = configureStore();

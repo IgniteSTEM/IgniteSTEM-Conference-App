@@ -12,7 +12,7 @@ class GeneralScheduleScreen extends React.Component {
 		const { events, selectedEvents, toggleEvent } = this.props;
 
 		return (
-			<View style={{ flex: 1, alignItems: 'center' }}>
+			<View style={{ flex: 1, alignItems: 'center',backgroundColor: '#FFF' }}>
 				<Heading>Schedule</Heading>
 				<EventList
 					events={events}
@@ -29,7 +29,7 @@ class PersonalScheduleScreen extends React.Component {
 		const { selectedEvents } = this.props;
 
 		return (
-			<View style={{ flex: 1, alignItems: 'center' }}>
+			<View style={{ flex: 1, alignItems: 'center', backgroundColor: '#FFF' }}>
 				<Heading>My Schedule</Heading>
 				{ 
 					selectedEvents.length > 0 ?

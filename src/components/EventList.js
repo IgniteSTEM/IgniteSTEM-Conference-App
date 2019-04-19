@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		marginTop: 20,
-		width: '85%'
+		width: '90%'
 	},
 	separator: {
 		height: 1,
