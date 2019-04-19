@@ -1,5 +1,5 @@
 import React from 'react';
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { View, TouchableOpacity } from 'react-native';
 import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
@@ -22,19 +22,19 @@ const MenuButton = (props) => {
 	);
 };
 
-const Root = createStackNavigator({
+const Root = createAppContainer(createStackNavigator({
 	Main: {
 		screen: createDrawerNavigator({
 			Home: HomeScreen,
 			Settings: SettingsScreen,
 			Schedule: ScheduleScreen
 		}),
-		navigationOptions: ({ navigation }) => ({
+		defaultNavigationOptions: ({ navigation }) => ({
 			headerLeft: <MenuButton navigation={navigation} />
 		})
 	},
 	'Event Detail': EventDetailScreen
-});
+}));
 
 const store = configureStore();
 

@@ -31,7 +31,7 @@ const saveAndReceiveUser = (name, _id) =>
 		setTimeout(() => dispatch(fetchEvents()), 500);
 	};
 
-const addUserWithNotifs = (name, pushToken) =>
+const createUserWithNotifs = (name, pushToken) =>
 	dispatch => {
 		fetch(USER_ADD, {
 			method: 'POST',
@@ -57,14 +57,14 @@ const processNotifStatus = (name, finalStatus) =>
 	dispatch => {
 		if (finalStatus !== 'granted') {
 			// Stop here if the user did not grant permissions
-			dispatch(addUserWithNotifs(name, ''));
+			dispatch(createUserWithNotifs(name, ''));
 		} else {
 			// Get the token that uniquely identifies this device
 			Notifications.getExpoPushTokenAsync()
-				.then((token) => dispatch(addUserWithNotifs(name, token)))
+				.then((token) => dispatch(createUserWithNotifs(name, token)))
 				.catch((e) => console.error(e));
 		}
-	}
+	};
 
 const registerNotifs = (name) => 
 	dispatch => {
@@ -75,7 +75,7 @@ const registerNotifs = (name) =>
 				// Android remote notification permissions are granted during the app
 				// install, so this will only ask on iOS
 				Permissions.askAsync(Permissions.NOTIFICATIONS)
-					.then(({ finalStatus }) => dispatch(processNotifStatus(name, finalStatus)))
+					.then(({ status}) => dispatch(processNotifStatus(name, status)))
 					.catch((e) => console.error(e));
 			} else {
 				dispatch(processNotifStatus(name, status))
