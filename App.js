@@ -10,6 +10,8 @@ import EventDetailScreen from './src/components/EventDetailScreen';
 import ScheduleScreen from './src/containers/ScheduleScreen';
 import LoadingScreen from './src/containers/LoadingScreen';
 import configureStore from './src/configureStore';
+import PDFViewer_Render from "./src/components/PDF_ViewerRender";
+import PDFListView from "./src/components/PDFList_New";
 import { loadUserIfExists } from './src/actions/user';
 
 const MenuButton = (props) => {
@@ -27,13 +29,15 @@ const Root = createAppContainer(createStackNavigator({
 		screen: createDrawerNavigator({
 			Home: HomeScreen,
 			Settings: SettingsScreen,
-			Schedule: ScheduleScreen
+			Schedule: ScheduleScreen,
+			PDFListView: PDFListView
 		}),
 		defaultNavigationOptions: ({ navigation }) => ({
 			headerLeft: <MenuButton navigation={navigation} />
 		})
 	},
-	'Event Detail': EventDetailScreen
+	'Event Detail': EventDetailScreen,
+	PDFViewer_Render: PDFViewer_Render
 }));
 
 const store = configureStore();
