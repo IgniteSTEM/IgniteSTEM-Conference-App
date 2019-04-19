@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, RefreshControl } from 'react-native';
 import EventListItem from './EventListItem';
+import moment from 'moment/src/moment';
 
 class EventList extends React.Component {
 	constructor(props) {
@@ -42,10 +43,24 @@ class EventList extends React.Component {
 		return selectedEvents.some((selectedEvent) => event._id === selectedEvent._id);
 	}
 
+	conflicts(event) {
+		if (this.isSelected(event)) return false;
+
+		const selectedEvents = this.props.selectedEvents || [];
+		for (let selectedEvent of selectedEvents) {
+			if (moment(event.startTime).isSame(selectedEvent.startTime) &&
+				moment(event.endTime).isSame(selectedEvent.endTime)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	render() {
 		const { events, selectable, onEventSelect } = this.props;
 
 		const isSelected = this.isSelected.bind(this);
+		const conflicts = this.conflicts.bind(this);
 		
 		return (
 			<View style={styles.container}>
@@ -57,6 +72,7 @@ class EventList extends React.Component {
 							event={item}
 							selectable={selectable}
 							selected={isSelected(item)}
+							disabled={conflicts(item)}
 							onSelect={() => onEventSelect(item)} />
 					)}
 					ItemSeparatorComponent={this.renderSeparator.bind(this)}

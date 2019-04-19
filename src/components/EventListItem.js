@@ -16,23 +16,24 @@ class EventListItem extends Component {
 	render() {
 		moment.locale('en');
 
-		const { event, selectable, onSelect } = this.props;
+		const { event, selectable, disabled, onSelect } = this.props;
 
-		const { name, registered, capacity, startTime, endTime, speaker } = event;
+		const { name, registered, capacity, startTime, endTime, speaker, mandatory, location } = event;
 
 		return (
 			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Event Detail', { event })}>
-				<View style={styles.block}>
+				<View style={disabled ? styles.blockDisabled : styles.block}>
 					<View>
 						<Text style={styles.name}>{name}</Text>
 						{speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text>}
+						{location === '' ? null : <Text style={styles.speaker}>{location}</Text>}
 						<Text style={styles.time}>
-							{registered}/{capacity}&nbsp;&nbsp;&nbsp;
+							{!mandatory ? `${registered}/${capacity}   ` : null}
 							{moment.utc(startTime).format('h:mm a')} – {moment.utc(endTime).format('h:mm a')}
 						</Text>
 					</View>
 					{
-						selectable ?
+						(selectable && !mandatory && !disabled) ?
 							<View>
 								<TouchableOpacity onPress={() => onSelect()}>
 									{this.renderIcon()}
@@ -54,6 +55,15 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		paddingRight: 10
+	},
+	blockDisabled: {
+		paddingBottom: 10,
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingRight: 10,
+		opacity: 0.25
 	},
 	name: {
 		fontSize: 20,

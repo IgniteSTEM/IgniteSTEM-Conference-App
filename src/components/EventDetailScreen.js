@@ -5,14 +5,19 @@ import moment from 'moment/src/moment';
 
 class EventDetailScreen extends React.Component {
 	render() {
-		const { name, registered, capacity, startTime, endTime, speaker, description } = this.props.navigation.getParam('event')
+		const { name, registered, capacity, startTime, endTime, speaker, description, location, mandatory } = this.props.navigation.getParam('event')
 
 		return (
-			<View style={{ flex: 1, alignItems: 'center' }}>
+			<View style={{ flex: 1, alignItems: 'center', margin: 20 }}>
 				<Heading>{name}</Heading>
 				{speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text>}
+				{location === '' ? null : <Text style={styles.speaker}>{location}</Text>}
 				<Text style={styles.time}>{moment.utc(startTime).format('h:mm a')} – {moment.utc(endTime).format('h:mm a')}</Text>
-				<Text>{registered}/{capacity}</Text>
+				{
+					!mandatory ? 
+						<Text>{registered}/{capacity}</Text>
+						: null
+				}
 				<Text>{description}</Text>
 			</View>
 		);
