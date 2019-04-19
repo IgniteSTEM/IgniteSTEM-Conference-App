@@ -1,18 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Heading from './Heading';
+import moment from 'moment/src/moment';
 
 class EventDetailScreen extends React.Component {
 	render() {
-		const { event, time, speaker } = this.props.navigation.getParam('item')
+		const { name, registered, capacity, startTime, endTime, speaker, description } = this.props.navigation.getParam('event')
 
 		return (
 			<View style={{ flex: 1, alignItems: 'center' }}>
-				<Heading>{event}</Heading>
-				{/* <Text style={styles.event}>{event}</Text> */}
-				<Text style={styles.time}>{time}</Text>
+				<Heading>{name}</Heading>
 				{speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text>}
-				<Text>Some kind of description?</Text>
+				<Text style={styles.time}>{moment.utc(startTime).format('h:mm a')} – {moment.utc(endTime).format('h:mm a')}</Text>
+				<Text>{registered}/{capacity}</Text>
+				<Text>{description}</Text>
 			</View>
 		);
 	}
@@ -20,11 +21,11 @@ class EventDetailScreen extends React.Component {
 
 const styles = StyleSheet.create({
 	time: {
-		fontSize: 14,
+		fontSize: 18,
 		color: '#555'
 	},
 	speaker: {
-		fontSize: 14,
+		fontSize: 22,
 		color: "#111"
 	}
 })

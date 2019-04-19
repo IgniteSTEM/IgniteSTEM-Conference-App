@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
+import moment from 'moment/src/moment';
 
 class EventListItem extends Component {
 	renderIcon() {
@@ -13,19 +14,22 @@ class EventListItem extends Component {
 	}
 
 	render() {
-		const { event, time, speaker, selectable, onSelect } = this.props;
+		moment.locale('en');
+
+		const { event, selectable, onSelect } = this.props;
+
+		const { name, registered, capacity, startTime, endTime, speaker } = event;
 
 		return (
-			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Event Detail', {
-				item: {
-					event, time, speaker
-				}
-			})}>
+			<TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Event Detail', { event })}>
 				<View style={styles.block}>
 					<View>
-						<Text style={styles.event}>{event}</Text>
-						<Text style={styles.time}>{time}</Text>
+						<Text style={styles.name}>{name}</Text>
 						{speaker === '' ? null : <Text style={styles.speaker}>{speaker}</Text>}
+						<Text style={styles.time}>
+							{registered}/{capacity}&nbsp;&nbsp;&nbsp;
+							{moment.utc(startTime).format('h:mm a')} – {moment.utc(endTime).format('h:mm a')}
+						</Text>
 					</View>
 					{
 						selectable ?
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingRight: 10
 	},
-	event: {
+	name: {
 		fontSize: 20,
 		fontWeight: '500'
 	},

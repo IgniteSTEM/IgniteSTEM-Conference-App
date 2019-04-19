@@ -3,15 +3,14 @@ import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
 import { View, TouchableOpacity } from 'react-native';
 import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
-import { Notifications } from 'expo';
 
-import HomeScreen from './src/components/HomeScreen';
+import HomeScreen from './src/containers/HomeScreen';
 import SettingsScreen from './src/components/SettingsScreen';
 import EventDetailScreen from './src/components/EventDetailScreen';
 import ScheduleScreen from './src/containers/ScheduleScreen';
-import LoadingScreen from './src/components/LoadingScreen';
+import LoadingScreen from './src/containers/LoadingScreen';
 import configureStore from './src/configureStore';
-import registerForPushNotificationsAsync from './src/registerForPushNotificationsAsync';
+import { loadUserIfExists } from './src/actions/user';
 
 const MenuButton = (props) => {
 	return (
@@ -42,6 +41,8 @@ const Root = createStackNavigator({
 
 const store = configureStore();
 
+store.dispatch(loadUserIfExists());
+
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -52,14 +53,12 @@ export default class App extends React.Component {
 	}
 
 	componentDidMount() {
-		registerForPushNotificationsAsync();
-	
 		// Handle notifications that are received or selected while the app
 		// is open. If the app was closed and then opened by tapping the
 		// notification (rather than just tapping the app icon to open it),
 		// this function will fire on the next tick after the app starts
 		// with the notification data.
-		this._notificationSubscription = Notifications.addListener(this._handleNotification);
+		// this._notificationSubscription = Notifications.addListener(this._handleNotification);
 	}
 	
 	_handleNotification = (notification) => {
@@ -69,18 +68,18 @@ export default class App extends React.Component {
 	componentWillMount() {
 		setTimeout(() => this.setState({
 			loading: false
-		}), 1000);
+		}), 1500);
 	}
 
 	render() {
-		if (this.state.loading) {
-			return <LoadingScreen />;
-		} else {
-			return (
-				<Provider store={store}>
+		return (
+			<Provider store={store}>
+			{
+				this.state.loading ?
+					<LoadingScreen /> :
 					<Root />
-				</Provider>
-			);
-		}
+			}
+			</Provider>
+		);
 	}
 }
