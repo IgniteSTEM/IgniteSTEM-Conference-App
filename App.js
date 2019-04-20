@@ -11,7 +11,7 @@ import ScheduleScreen from './src/containers/ScheduleScreen';
 import LoadingScreen from './src/containers/LoadingScreen';
 import configureStore from './src/configureStore';
 import PDFViewer_Render from "./src/components/PDF_ViewerRender";
-import PDFListView from "./src/components/PDFList_New";
+import Resources from "./src/components/PDFList";
 import { loadUserIfExists } from './src/actions/user';
 
 const MenuButton = (props) => {
@@ -30,7 +30,7 @@ const Root = createAppContainer(createStackNavigator({
 			Home: HomeScreen,
 			Settings: SettingsScreen,
 			Schedule: ScheduleScreen,
-			PDFListView: PDFListView
+			Resources: Resources
 		}),
 		defaultNavigationOptions: ({ navigation }) => ({
 			headerLeft: <MenuButton navigation={navigation} />
