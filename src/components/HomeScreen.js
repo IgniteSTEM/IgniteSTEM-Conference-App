@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, ScrollView} from 'react-native';
+import { View, ImageBackground, ScrollView, Text} from 'react-native';
 import Heading from './Heading';
 
 export default class App extends Component {

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 
 import HomeScreen from './src/containers/HomeScreen';
+import aboutIgnite from './src/components/aboutIgnite';
 import SettingsScreen from './src/components/SettingsScreen';
 import EventDetailScreen from './src/components/EventDetailScreen';
 import ScheduleScreen from './src/containers/ScheduleScreen';
@@ -27,7 +28,8 @@ const Root = createStackNavigator({
 		screen: createDrawerNavigator({
 			Home: HomeScreen,
 			Settings: SettingsScreen,
-			Schedule: ScheduleScreen
+			Schedule: ScheduleScreen,
+			About: aboutIgnite
 		}),
 		navigationOptions: ({ navigation }) => ({
 			headerLeft: <MenuButton navigation={navigation} />,
