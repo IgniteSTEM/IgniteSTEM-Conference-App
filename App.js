@@ -4,15 +4,14 @@ import { View, TouchableOpacity } from 'react-native';
 import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
 
-import HomeScreen from './src/containers/HomeScreen';
-import aboutIgnite from './src/components/aboutIgnite';
-import SettingsScreen from './src/components/SettingsScreen';
+import AboutIgnite from './src/containers/AboutIgnite';
+import ResourcesScreen from './src/components/ResourcesScreen';
 import EventDetailScreen from './src/components/EventDetailScreen';
 import ScheduleScreen from './src/containers/ScheduleScreen';
 import LoadingScreen from './src/containers/LoadingScreen';
 import configureStore from './src/configureStore';
 import PDFViewer_Render from "./src/components/PDF_ViewerRender";
-import Resources from "./src/components/PDFList";
+import PDFList from "./src/components/PDFList";
 import { loadUserIfExists } from './src/actions/user';
 
 const MenuButton = (props) => {
@@ -28,8 +27,8 @@ const MenuButton = (props) => {
 const Root = createAppContainer(createStackNavigator({
 	Main: {
 		screen: createDrawerNavigator({
-			Home: aboutIgnite,
-			Resources: HomeScreen,
+			Home: AboutIgnite,
+			Resources: ResourcesScreen,
 			Schedule: ScheduleScreen,
 		}),
 		navigationOptions: ({ navigation }) => ({
