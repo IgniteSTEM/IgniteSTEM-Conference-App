@@ -7,7 +7,9 @@ import { toggleEvent, fetchEvents } from '../actions/schedule';
 import Heading from '../components/Heading';
 import { Colors } from '../theme';
 
-class GeneralScheduleScreen extends React.Component {
+class GeneralScheduleScreen extends React.Component { 
+
+
 	render() {
 		const { events, userEvents, toggleEvent, refreshEvents } = this.props;
 

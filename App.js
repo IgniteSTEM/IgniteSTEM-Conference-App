@@ -1,5 +1,5 @@
 import React from 'react';
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import { createDrawerNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
 import { View, TouchableOpacity } from 'react-native';
 import { Provider } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
@@ -11,6 +11,8 @@ import EventDetailScreen from './src/components/EventDetailScreen';
 import ScheduleScreen from './src/containers/ScheduleScreen';
 import LoadingScreen from './src/containers/LoadingScreen';
 import configureStore from './src/configureStore';
+import PDFViewer_Render from "./src/components/PDF_ViewerRender";
+import Resources from "./src/components/PDFList";
 import { loadUserIfExists } from './src/actions/user';
 
 const MenuButton = (props) => {
@@ -23,13 +25,12 @@ const MenuButton = (props) => {
 	);
 };
 
-const Root = createStackNavigator({
+const Root = createAppContainer(createStackNavigator({
 	Main: {
 		screen: createDrawerNavigator({
-			Home: HomeScreen,
-			Settings: SettingsScreen,
+			Home: aboutIgnite,
+			Resources: HomeScreen,
 			Schedule: ScheduleScreen,
-			About: aboutIgnite
 		}),
 		navigationOptions: ({ navigation }) => ({
 			headerLeft: <MenuButton navigation={navigation} />,
@@ -39,7 +40,8 @@ const Root = createStackNavigator({
 		})
 	},
 	'Event Detail': EventDetailScreen,
-});
+	PDFViewer_Render: PDFViewer_Render
+}));
 
 const store = configureStore();
 

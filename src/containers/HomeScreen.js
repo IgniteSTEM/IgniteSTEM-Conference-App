@@ -5,6 +5,7 @@ import AddUserModal from '../components/AddUserModal';
 import { connect } from 'react-redux';
 import { addUser } from '../actions/user';
 import { fetchEvents } from '../actions/schedule';
+import Resources from "../components/PDFList";
 
 class HomeScreen extends Component {
 	constructor(props) {
@@ -19,10 +20,11 @@ class HomeScreen extends Component {
 		const { exists, addUser } = this.props;
 		
 		return (
-			<View style={{'backgroundColor': '#FFF', 'alignItems': 'center'}}>
+			<View style={{'backgroundColor': '#FFF', 'alignItems': 'center', marginBottom: 100}}>
 				<AddUserModal visible={!exists} onFinish={(name) => addUser(name)} />
-				<Heading>Home Screen</Heading>
+				<Heading>Learn more</Heading>
 				<ImageBackground source={require('../../assets/bckgrnd.jpg')} Image={{'resizeMode': 'contain'}} style={{width: '100%', height: '100%'}}>
+					<Resources navigation={this.props.navigation}/>
 				</ImageBackground>
 			</View>
 		);
